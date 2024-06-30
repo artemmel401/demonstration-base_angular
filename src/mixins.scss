@@ -1,0 +1,43 @@
+@mixin flex-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-center-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin text-caption {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@mixin text-body {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@mixin text-body-strong {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+@mixin button-with-icon {
+  @include flex-center-center;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin information-block {
+  padding-left: var(--margin-internal);
+  padding-right: var(--margin-internal);
+}

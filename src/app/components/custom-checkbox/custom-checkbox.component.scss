@@ -1,0 +1,29 @@
+@import '../../../mixins.scss';
+
+.checkbox{
+  @include button-with-icon;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--border-radius-standart);
+  &__container{
+    @include flex-center;
+  }
+  
+  &_active{
+    background-image: url(../../../../public/icons/check.svg);
+    background-color: var(--color-yellow-light);
+  }
+  &_disable{
+    border: var(--border-standart);
+  }
+
+  &__name{
+    @include text-body;
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+
+  &__info{
+    cursor: pointer;
+  }
+}

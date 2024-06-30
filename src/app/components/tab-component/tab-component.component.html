@@ -1,0 +1,9 @@
+<div 
+  (click)="onChangeActiveTab(text)"  
+  (mouseenter)="onChangeIsHover(true)"
+  (mouseleave)="onChangeIsHover(false)"
+  [ngClass]="{'tab_active': isActive}" class="tab">
+  <img *ngIf="!canDelete" class="tab_home" alt="home" src="icons/home.svg">
+  <span *ngIf="canDelete">{{text}}</span>
+  <div [ngClass]="{'tab__close_active' : isActive}" (click)="onDeleteTab(text)" *ngIf="isHover && canDelete" class="tab__close"></div>
+</div>

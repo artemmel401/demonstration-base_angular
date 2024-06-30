@@ -1,0 +1,28 @@
+@import '../../../mixins.scss';
+
+.button{
+  @include button-with-icon;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--border-radius-standart);
+  height: 36px;
+  &_text{
+    @include text-body;
+    min-width: 128px;
+  }
+  &_img{
+    padding: 10px;
+  }
+  &__img{
+    width: var(--size-icon-standart);
+    height: var(--size-icon-standart);
+  }
+  &__yellow{
+    background-color: var(--color-yellow-light);
+    &:hover{
+      background-color: var(--color-yellow-dark);
+    }
+  }
+  &__white:hover{
+    border: var(--border-standart);
+  }
+}

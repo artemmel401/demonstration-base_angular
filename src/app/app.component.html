@@ -1,0 +1,165 @@
+<header class="header">
+  <p class="header__text">Demonstration base 1C:ERP WE</p>
+  <div class="header__controls controls">
+    <button title="minimize" class="controls__controle controls__minimize">
+    </button>
+    <button title="full" class="controls__controle controls__full">
+    </button>
+    <button title="close" class="controls__controle controls__close">
+    </button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="main__navigation navigation">
+    <div class="navigation__info info">
+      <div class="info__left">
+        <img class="info__user" src="profile.png">
+        <p class="info__username">Livia Mango</p>
+      </div>
+      <div class="info__right">
+        <button class="info__button info__notification"></button>
+        <button class="info__button info__clock"></button>
+        <button class="info__button info__menu"></button>
+      </div>
+    </div>
+    <div class="navigation__inputBlock inputBlock">
+      <img alt="search" src="icons/search.svg">
+      <input [(ngModel)]="inputValue" (input)="onSearchChange($event)"  class="inputBlock__input" type="search" placeholder="Search" appShiftSFocus>
+      <img src="shift-s.svg">
+    </div>
+    <div class="navigation__linksBlock">
+      <a *ngFor="let link of links" class="navigation__link link">
+        <img class="link__img" [src]="'icons/' + link.imgName + '.svg'">
+        <p class="link__name">{{link.name}}</p>
+      </a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content__pages pages">
+      <tab-component *ngFor="let tab of tabs" 
+        [isActive]="tab.text === activeTab" 
+        [text]="tab.text" 
+        [canDelete]="tab.text !== 'Home'"
+        [onChangeActiveTab]="onChangeActiveTab"
+        [onDeleteTab]="onDeleteTab">
+      </tab-component>
+    </div>
+    <div class="content__information information">
+      <div class="information__titleBlock titleBlock">
+        <div class="titleBlock__left">
+          <button class="titleBlock__button titleBlock__button_prev"></button>
+          <button class="titleBlock__button titleBlock__button_next"></button>
+          <h1 class="titleBlock__title">{{activeTab}}</h1>
+        </div>
+        <div class="titleBlock__right">
+          <button class="titleBlock__button titleBlock__button_favorite"></button>
+          <button class="titleBlock__button titleBlock__button_link"></button>
+          <button class="titleBlock__button titleBlock__button_dots"></button>
+        </div>
+      </div>
+      <div class="content__settings settings">
+        <div class="settings__links">
+          <p 
+            [ngClass]="{'settings__link_active': firstSettingsActiveTab === tab}" 
+            *ngFor="let tab of firstSettingsTabs"
+            (click)="onChangeSettingsTab(tab, true)" 
+            class="settings__link">
+            {{tab}}
+          </p>
+        </div>
+        <div class="settings__buttons">
+          <div class="settings__contentButtons">
+            <ng-container *ngFor="let button of buttons">
+              <ng-container *ngIf="!button.options; else customOptionTemplate">
+                <custom-button class="settings__button" [buttonText]="button.text" [imgUrl]="button.icon"></custom-button>
+              </ng-container>
+              <ng-template #customOptionTemplate>
+                <custom-options class="settings__button" [selectedValue]="button.text" [options]="button.options" [isHoverBackground]="false"></custom-options>
+              </ng-template>
+            </ng-container>
+          </div>
+          <div class="settings__contentButtons">
+            <custom-button class="settings__button" [buttonText]="'Save'"></custom-button>
+            <custom-button class="settings__button" [btnColor]="'yellow'" [buttonText]="'Save and Close'"></custom-button>
+          </div>
+        </div>
+        <div>
+          <label class="information__label">Full Name</label>
+          <div class="information__inputBlock">
+            <input type="text" class="information__input information__input_fullName">
+            <custom-checkbox [name]="'Not Valid'" [info]="'true'"></custom-checkbox>
+          </div>
+        </div>
+        <div>
+          <label class="information__label">Individual</label>
+          <div class="information__inputBlock">
+            <custom-options class="information__options"></custom-options>
+            <custom-button class="information__button" [imgUrl]="'icons/copy.svg'"></custom-button>
+            <custom-button class="information__button" [imgUrl]="'icons/copy.svg'"></custom-button>
+          </div>
+        </div>
+        <div>
+          <label class="information__label">Department</label>
+          <div class="information__inputBlock">
+            <custom-options class="information__options"></custom-options>
+            <custom-button class="information__button" [imgUrl]="'icons/copy.svg'"></custom-button>
+          </div>
+        </div>
+        <div class="information__line">
+          <custom-checkbox [name]="'Can log on to Application'"></custom-checkbox>
+          <a class="information__a">Set authentication restraction</a>
+        </div>
+      </div>
+      <div class="content__settings settings">
+        <div class="settings__links">
+          <p 
+            [ngClass]="{'settings__link_active': secondSettingsActiveTab === tab}" 
+            *ngFor="let tab of secondSettingsTabs"
+            (click)="onChangeSettingsTab(tab, false)" 
+            class="settings__link">
+            {{tab}}
+          </p>
+        </div>
+        <div>
+          <label class="information__label">Username (used on sign in)</label>
+          <div class="information__inputBlock">
+            <custom-options class="information__options" [selectedValue]="userRoles[0]" [options]="userRoles"></custom-options>
+          </div>
+          <div class="information__block">
+            <custom-checkbox class="information__authLine" [onChangeIsActive]="onChangeActive1C" [isActive]="isActive1C" [name]="'1C:Enterprise authentication'"></custom-checkbox>
+            <div *ngIf="isActive1C" class="information__1CAuth">
+              <div class="information__line">
+                <img (click)="onChangeLockBlankPassword()" class="information__lock" [src]="isLockBlankPassword ? 'icons/lock.svg' : 'icons/unlock.svg'">
+                <span class="information__span">Blank password</span>
+                <a class="information__a">Set password</a>
+              </div>
+              <custom-checkbox class="information__authLine" [name]="'Require to set a password upon authorization'" [info]="'info'"></custom-checkbox>
+              <custom-checkbox class="information__authLine" [name]="'User has been prevented from changing password'"></custom-checkbox>
+              <custom-checkbox class="information__authLine" [name]="'Show in the selection list'" [isActive]="true"></custom-checkbox>
+            </div>
+            <custom-checkbox class="information__authLine" [name]="'OpenID authentication'"></custom-checkbox>
+            <custom-checkbox class="information__authLine" [name]="'OS authentication'"></custom-checkbox>
+          </div>
+        </div>
+        <div>
+          <label class="information__label">Раздел по умолчанию</label>
+          <div class="information__inputBlock">
+            <custom-options class="information__options"></custom-options>
+            <custom-button class="information__button"  [imgUrl]="'icons/copy.svg'"></custom-button>
+          </div>
+        </div>
+        <div>
+          <label class="information__label">Application interface language</label>
+          <div class="information__inputBlock">
+            <custom-options [selectedValue]="languages[0]" [options]="languages" class="information__options"></custom-options>
+          </div>
+        </div>
+        <div class="settings__contentButtons">
+          <custom-button class="settings__button" [buttonText]="'Save'"></custom-button>
+          <custom-button class="settings__button" [btnColor]="'yellow'" [buttonText]="'Save and Close'"></custom-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

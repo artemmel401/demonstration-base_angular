@@ -1,0 +1,5 @@
+<button [ngClass]="btnColor ? 'button__' + btnColor : 'button__white'" *ngIf="buttonText" class="button button_text">{{buttonText}}</button>
+<button [ngClass]="btnColor ? 'button__' + btnColor : 'button__white'" *ngIf="!buttonText" class="button button_img">
+  <img class="button__img" [src]="imgUrl">
+</button>
+

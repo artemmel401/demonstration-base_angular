@@ -1,0 +1,8 @@
+<div class="checkbox__container">
+  <button [ngClass]="isActive ? 'checkbox_active' : 'checkbox_disable'" class="checkbox" (click)="onChangeActive()">
+    <img *ngIf="isActive" src="icons/check.svg">
+  </button>
+  <span class="checkbox__name">{{name}}</span>
+  <img class="checkbox__info" *ngIf="info" [title]="info" src="icons/info.svg">
+</div>
+

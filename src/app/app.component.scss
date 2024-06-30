@@ -1,0 +1,370 @@
+@import '../mixins.scss';
+
+.header{
+  @include flex-center-between;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 32px;
+  background-color: var(--color-yellow-dark);
+  border-radius: 7px 7px 0 0;
+  padding-left: var(--padding-standart);
+  &__text{
+    @include text-caption;
+  }
+  .controls{
+    @include flex-center;
+    height: 100%;
+    &__controle{
+      @include button-with-icon;
+      width: 46px;
+      height: 100%;
+    }
+    &__minimize{
+      background-image: url(../../public/icons/controls/minimize.svg);
+    }
+    &__full{
+      background-image: url(../../public/icons/controls/full.svg);
+    }
+    &__close{
+      background-image: url(../../public/icons/cross.svg);
+    }
+  }
+}
+
+.main{
+  background-color: var(--color-light-gray);
+  padding: var(--padding-standart);
+  height: 100%;
+  padding: 48px var(--padding-standart);
+
+  .navigation{
+    position: fixed;
+    width: 290px;
+    padding-bottom: var(--padding-standart);
+
+    .info{
+      @include flex-center-between;
+      margin-bottom: 22px;
+      
+      &__left{
+        @include flex-center;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+      &__right{
+        @include flex-center;
+        height: 36px;
+      }
+
+      &__user{
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        margin-right: 12px;
+      }
+  
+      &__username{
+        @include text-body;
+      }
+  
+      &__button{
+        @include button-with-icon;
+        width: 36px;
+        height: 100%;
+        padding: 6px;
+        border-radius: var(--border-radius-standart);
+        &:hover{
+          background-color: var(--color-gray);
+        }
+      }
+  
+      &__notification{
+        background-image: url(../../public/icons/bell-02.svg);
+      }
+      &__clock{
+        background-image: url(../../public/icons/clock-rewind.svg);
+      }
+      &__menu{
+        background-image: url(../../public/icons/menu.svg);
+      }
+    }
+
+    .inputBlock{
+      @include flex-center;
+      padding: 8px 10px 8px 8px;
+      margin-bottom: var(--padding-internal);
+      border-radius: var(--border-radius-big);
+      border: var(--border-standart);
+      background-color: var(--color-white);
+      &__input{
+        @include text-body;
+        margin-left: 8px;
+        margin-right: 8px;
+        flex: 1;
+      }
+    }
+
+    .link{
+      @include flex-center;
+      width: 100%;
+      border-radius: var(--border-radius-big);
+      cursor: pointer;
+      user-select: none;
+      padding: var(--margin-small);
+      &:not(:last-child){
+        margin-bottom: var(--margin-small);
+      }
+      &:hover{
+        background-color: var(--color-gray)
+      }
+
+      &__name{
+        @include text-body;
+        margin-left: var(--margin-small);
+      }
+      &__img{
+        padding: 6px;
+      }
+    }
+
+  }
+
+  .content{
+    border: var(--border-standart);
+    border-radius: var(--border-radius-big);
+    margin-left: 336px;
+    overflow: auto;
+
+    .pages{
+      @include flex-center;
+      width: 100%;
+      background: var(--color-light-gray);
+      border-bottom: var(--border-standart);
+      &__page{
+        @include flex-center-center;
+        @include text-caption;
+        position: relative;
+        padding: 10px 12px;
+        cursor: pointer;
+        user-select: none;
+        border-right: var(--border-standart);
+        &:hover{
+          background-color: var(--color-dark-gray);
+        }
+        &_home{
+          width: var(--size-icon-standart);
+          height: var(--size-icon-standart);
+        }
+        &_active{
+          background-color: var(--color-white);
+          &:after{
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            top: 100%;
+            content: '';
+            background-color: #fff;
+          }
+        }
+      }
+    }
+
+    .information{
+      background-color: var(--color-white);
+
+      .titleBlock{
+        @include flex-center-between;
+        @include information-block;
+        padding-bottom: var(--padding-internal);
+        padding-top: var(--padding-internal);
+        border-bottom: var(--border-standart);
+
+        &__left{
+          @include flex-center;
+        }
+        &__right{
+          @include flex-center;
+        }
+
+        &__button{
+          @include button-with-icon;
+          height: 36px;
+          width: 36px;
+          margin-right: var(--margin-small);
+          padding: 10px;
+          border-radius: var(--border-radius-standart);
+          &:hover{
+            background-color: var(--color-gray);
+          }
+
+          &_prev{
+            background-image: url(../../public/icons/arrow-narrow-left.svg);
+          }
+          &_next{
+            background-image: url(../../public/icons/arrow-narrow-right.svg);
+            margin-right: 0;
+          }
+          &_favorite{
+            background-image: url(../../public/icons/star.svg);
+          }
+          &_link{
+            background-image: url(../../public/icons/link.svg);
+          }
+          &_dots{
+            background-image: url(../../public/icons/dots-horizontal.svg);
+            margin-right: 0;
+          }
+        }
+
+        &__title{
+          font-size: 28px;
+          font-weight: 600;
+          line-height: 32px;
+          margin-left: var(--padding-internal);
+        }
+      }
+
+      .settings{
+        @include information-block;
+        padding-top: var(--margin-internal);
+        padding-bottom: var(--margin-internal);
+        &:not(:last-child){
+          border-bottom: var(--border-standart);
+        }
+        &__links{
+          @include flex-center;
+          flex-wrap: wrap;
+          padding-bottom: var(--margin-internal);
+          overflow: auto
+        }
+
+        &__link{
+          @include text-body;
+          @include flex-center-center;
+          line-height: 36px;
+          color: var(--color-blue);
+          padding-left: var(--padding-standart);
+          padding-right: var(--padding-standart);
+          border-radius: var(--border-radius-standart);
+          cursor: pointer;
+          user-select: none;
+          &:hover{
+            color: var(--color-text-black);
+            background-color: var(--color-gray);
+          }
+
+          &_active{
+            color: var(--color-text-black);
+            background-color: var(--color-gray);
+          }
+
+
+        }
+
+        &__buttons{
+          @include flex-center-between;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom:  var(--padding-internal);
+        }
+
+        &__contentButtons{
+          @include flex-center;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+      }
+
+      &__block{
+        margin-bottom: var(--padding-internal);
+      }
+
+      &__line{
+        @include flex-center;
+      }
+
+      &__label{
+        @include text-body-strong;
+        margin-bottom: 8px;
+        display: block
+      }
+
+      &__input{
+        @include text-body;
+        line-height: 35px;
+        width: 50%;
+        border: 1px solid var(--color-gray);
+        border-radius: var(--border-radius-standart);
+        padding-left: var(--padding-standart);
+        &:not(:only-child){
+          margin-right: var(--padding-standart);
+        }
+        &Block{
+          @include flex-center;
+          width: 100%;
+          margin-bottom: var(--padding-internal);
+        }
+
+      }
+
+      &__button{
+        @include button-with-icon;
+        width: 36px;
+        height: 36px;
+        &:not(:last-child){
+          margin-right: var(--padding-standart);
+        }
+        &_copy{
+          background: url(../../public/icons/copy.svg);
+          background-size: var(--size-icon-standart);
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        &_dots{
+          background: url(../../public/icons/dots-horizontal.svg);
+          background-size: var(--size-icon-standart);
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      }
+
+      &__options{
+        width: 50%;
+        &:not(:only-child){
+          margin-right: var(--padding-standart);
+        }
+      }
+
+      &__a{
+        @include text-body;
+        color: var(--color-blue);
+        line-height: 36px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      &__1CAuth{
+        padding-left: var(--padding-internal);
+      }
+
+      &__lock{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      &__span{
+        @include text-body;
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+
+      &__authLine{
+        @include flex-center;
+        height: 36px;
+        margin-bottom: var(--margin-small);
+      }
+    }
+  }
+}
